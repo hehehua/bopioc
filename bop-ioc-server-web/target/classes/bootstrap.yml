@@ -1,0 +1,18 @@
+ 
+server:
+  servlet:
+    context-path: /bop-ioc-server-web
+  port: 8587
+
+spring:
+  application:
+    name: bop-ioc-server-web
+    group: com.poly.iu.mg
+
+alibaba:
+  acm:
+    group: ${group:DEFAULT_GROUP}
+    endpoint: ${endpoint:acm.aliyun.com}
+    fileExtension: ${fileExtension:yaml}
+    namespace: ${namespace:52e0a4cb-7dc1-4346-bb1d-abd3eb4afdd0}
+    ramRoleName: ${ramRoleName:KubernetesWorkerRole-68f28ddc-6c89-41b4-9cef-5346700fa861}

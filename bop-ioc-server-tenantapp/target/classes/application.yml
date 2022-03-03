@@ -1,0 +1,134 @@
+service:
+  registry:
+    expose-host: 192.168.18.108
+    expose-port: ${server.port}
+    consul-host: 192.168.18.101
+    consul-port: 8500
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    name: bop_ioc
+    #dev
+    url: jdbc:mysql://192.168.18.109:3306/bop_ioc?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: Poly@2017
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  redis:
+    #dev
+    host: 192.168.18.109
+    #test
+    #host: 120.79.150.108
+    port: 6379
+    password: Poly@2017
+    timeout: 10000
+    database: 1
+    lettuce:
+      pool:
+        max-active: 200
+        max-idle: 10
+        min-idle: 2
+        max-wait: 10000
+  cloud:
+    consul:
+      host: ${service.registry.consul-host}
+      port: ${service.registry.consul-port}
+      discovery:
+        health-check-url: http://${service.registry.expose-host}:${service.registry.expose-port}${server.servlet.context-path}/info
+        health-check-interval: 5s
+        service-name: ${spring.application.name}
+        # 启用服务发现
+        enabled: true
+        query-passing: true
+        # 表示注册时使用IP而不是hostname
+        prefer-ip-address: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+  filter.create: All
+  datasource:
+    url: jdbc:mysql://192.168.18.109:3306/camunda?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useSSL=false&nullCatalogMeansCurrent=true
+    username: root
+    password: Poly@2017
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: camundaDatebookHikariCP
+      minimum-idle: 1
+      maximum-pool-size: 8
+      idle-timeout: 12300
+      connection-timeout: 45600
+      connection-test-query: SELECT 1
+
+mybatis-plus:
+  mapper-locations: classpath*:com/bzcst/bop/ioc/**.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.bzcst.bop.ioc.**
+  #枚举类型，多个使用分号分隔
+  typeEnumsPackage: com.bzcst.bop.common.enums
+  global-config:
+    db-config:
+      logic-delete-value: "id"
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+swagger:
+  enabled: true
+  title:  田丁智慧社区-工单系统服务版APP
+  description: 田丁智慧社区-工单系统服务版APP
+  version: 1.0
+  base-path: /**
+  contact:
+    name: baozhen
+    email: baozhen@shenzhenpoly.com
+  license: Apache License, Version 2.0
+  license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+  base-package: com.bzcst.bop.ioc
+  exclude-path: /error
+  security-schemes:
+    - Authorization
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      base-path: /
+  server:
+    servlet:
+      context-path: ${server.servlet.context-path}
+    port: ${server.port}
+  endpoint:
+    health:
+      show-details: always
+info: {status: ok}
+
+feign:
+  client:
+    config:
+      default:
+        ConnectTimeout: 10000
+        ReadTimeout: 30000
+
+logging:
+  level:
+    org.springframework: info

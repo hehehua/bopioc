@@ -1,0 +1,81 @@
+# ****************项目工程配置*********************
+# 工程名称
+projectName: bop-ioc-server-ownerapp
+# jar版本
+jarVersion: 1.0.0
+# 业务版本号
+businessVersion: v1.0.0
+
+
+# ****************docker镜像相关配置*********************
+# 镜像仓库命名空间
+dockerImageRepoNameSpace: property-mg-tp
+# Jfrog仓库名称(不建议修改)
+jfogServiceName: Poly-IU-MG
+
+#******************容器编排设置*****************************
+k8s:
+  label:
+    key: node
+    value: poly
+  env:
+      test:
+          # 命名空间((不建议修改))
+          nameSpace: mg-tp-test
+          # 应用容器端口
+          appContainerPort: 8585
+          # 创建实例数量(不建议修改)
+          instanceNum: 1
+          # JAVA_OPTS
+          javaOpts: ''
+          # 分布式配置中心
+          acm:
+            group: com.poly.iu.mg
+            endpoint: acm.aliyun.com
+            fileExtension: yaml
+            namespace: fce7ffa3-9a83-487d-91a9-f66c6c9aa1d9
+            ramRoleName: KubernetesWorkerRole-68f28ddc-6c89-41b4-9cef-5346700fa861
+      uat:
+          # 命名空间(不建议修改)
+          nameSpace: mg-tp-uat
+          # 应用容器端口
+          appContainerPort: 8585
+          # 对外暴露端口(30000-32700之间)
+          outputPort: 30508
+          # 创建实例数量(不建议修改)
+          instanceNum: 1
+          # JAVA_OPTS
+          javaOpts: ''
+          # 分布式配置中心
+          acm:
+            group: com.poly.iu.mg
+            endpoint: addr-sz-internal.edas.aliyun.com
+            fileExtension: yaml
+            namespace: 7c4048f6-2465-4595-8ecf-f62707df846a
+            ramRoleName: KubernetesWorkerRole-68f28ddc-6c89-41b4-9cef-5346700fa861
+      prod:
+          # 命名空间(不建议修改)
+          nameSpace: data-center
+          # 应用容器端口
+          appContainerPort: 8585
+          # 对外暴露端口(30000-32700之间)
+          outputPort: 30505
+          # 创建实例数量(不建议修改)
+          instanceNum: 3
+          # JAVA_OPTS
+          javaOpts: ''
+          # 分布式配置中心
+          acm:
+            group: com.poly.iu.mg
+            endpoint: addr-sz-internal.edas.aliyun.com
+            fileExtension: yaml
+            namespace: f97362d1-f27b-48bd-b55b-faa8b25cf8e3
+            ramRoleName: KubernetesWorkerRole-51067a9e-6f04-4df9-b6e8-e134bf44d103
+email:
+    # 测试负责人邮件
+    tester: zengxiaojiao@baozhentianding.com
+    # 上线运维负责人邮件
+    publisher: huangguanzhong@shenzhenpoly.com
+
+
+

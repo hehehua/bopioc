@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.bzcst</groupId>
+        <artifactId>bop-parent</artifactId>
+        <version>1.3.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bop-ioc</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <name>bop-ioc</name>
+    <description>工单服务</description>
+
+    <properties>
+        <revision>1.0.0-SNAPSHOT</revision>
+        <skipDeployment>false</skipDeployment>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.bzcst</groupId>
+                <artifactId>bop-ioc-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bzcst</groupId>
+                <artifactId>bop-ioc-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bzcst</groupId>
+                <artifactId>bop-ioc-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <!-- 接口定义-->
+        <module>bop-ioc-api</module>
+        <!-- 对外客户端-->
+        <module>bop-ioc-client</module>
+        <!-- 功能模块 -->
+        <module>bop-ioc-service</module>
+
+        <!-- 业主版APP -->
+        <module>bop-ioc-server-ownerapp</module>
+        <!-- 服务版APP-->
+        <module>bop-ioc-server-tenantapp</module>
+        <!-- web后台-->
+        <module>bop-ioc-server-web</module>
+
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>${skipDeployment}</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

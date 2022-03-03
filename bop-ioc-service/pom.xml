@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.bzcst</groupId>
+        <artifactId>bop-ioc</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>bop-ioc-service</artifactId>
+    <packaging>jar</packaging>
+
+    <name>bop-ioc-service</name>
+    <description>功能模块</description>
+    <dependencies>
+        <dependency>
+            <groupId>com.bzcst</groupId>
+            <artifactId>bop-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bzcst</groupId>
+            <artifactId>bop-component-saas-mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bzcst</groupId>
+            <artifactId>bop-ioc-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+</project>

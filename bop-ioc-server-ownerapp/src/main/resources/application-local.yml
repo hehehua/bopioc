@@ -1,0 +1,6 @@
+service:
+  registry:
+    expose-host: 127.0.0.1
+    expose-port: ${server.port}
+    consul-host: 127.0.0.1
+    consul-port: 8500
